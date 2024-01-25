@@ -7,4 +7,5 @@ urlpatterns = [
     path('list', list, name='list'),
     path('login',views.custom_login),
     path('logout',views.logout_view),
+    path('addmember', views.addmember, name='addmember'),
 ]

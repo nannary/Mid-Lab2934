@@ -43,7 +43,7 @@ def custom_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'เข้าสู่ระบบสำเร็จ!')
+            messages.success(request, f'เข้าสู่ระบบสำเร็จ! ยินดีต้อนรับ, {user.username}!')
             return redirect('/')
         else:
             messages.error(request, 'เข้าสู่ระบบผิดพลาด. โปรดตรวจสอบข้อมูลของคุณอีกครั้ง.')
@@ -53,3 +53,19 @@ def custom_login(request):
 def logout_view(request):
         logout(request)
         return render(request, 'login.html')
+    
+def addmember(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['pswd']
+        email = request.POST['email']
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+
+        # สร้างผู้ใช้ในฐานข้อมูล
+        user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name)
+
+        messages.success(request, 'สมัครสมาชิกสำเร็จ !')
+        return redirect('/')
+    
+    return render(request, 'addmember.html')

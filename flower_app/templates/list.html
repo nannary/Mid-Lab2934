@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container mt-3">
+  <h2>ข้อมูลดอกไม้</h2>
+  <p>ข้อมูลดอกไม้ต่าง ๆ ในระบบ</p>
+  <form class="d-flex" method="get" action="{% url 'list' %}">
+    <input
+      class="form-control me-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+      name="name"
+    />
+    <button class="btn btn-outline-dark" type="submit">
+      <i class="fas fa-search"></i>
+    </button>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>รหัส</th>
+        <th>ชื่อ</th>
+        <th>วงศ์</th>
+        <th>สกุล</th>
+        <th>สรรพคุณ</th>
+        <th>รูปภาพ</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in Flowerdata %}
+      <tr>
+        <td>{{i.flower_id}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.wong}}</td>
+        <td>{{i.sagun}}</td>
+        <td>{{i.properties}}</td>
+        <td><img src="{{ i.image.url }}" style="width: 100px" alt="..." /></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
